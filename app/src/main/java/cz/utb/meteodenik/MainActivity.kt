@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import cz.utb.meteodenik.ui.theme.MeteoDenikTheme
 
-// Projekt MeteoDenik
+// Projekt MeteoDenik prvni commit
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
