@@ -16,40 +16,46 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import cz.utb.meteodenik.R
 
-private const val TAG = "Cyklus"
 @Composable
 fun DetailObrazovka(mesto: String, teplota: Double) {
+    val context = LocalContext.current
+    val teplotaJeZnama = !teplota.isNaN()
+    val textKeSdileni =
+        if (teplotaJeZnama) stringResource(R.string.sdileny_text, mesto, teplota) else mesto
+
     Scaffold { insety ->
         Column(modifier = Modifier.padding(insety).padding(16.dp)) {
+
+            Text(
+                text = stringResource(R.string.detail_titulek),
+                style = MaterialTheme.typography.labelLarge
+            )
             Text(text = mesto, style = MaterialTheme.typography.headlineMedium)
             Text(
-                text = if (teplota.isNaN()) {
-                    stringResource(R.string.teplota_chybi)        // extra chybělo
-                } else {
+                text = if (teplotaJeZnama) {
                     stringResource(R.string.teplota_format, teplota)
-                }
+                } else {
+                    stringResource(R.string.teplota_chybi)
+                },
+                style = MaterialTheme.typography.titleLarge
             )
-            SdiletTlacitko(mesto = mesto, teplota = teplota)
-        }
-    }
-}
 
-@Composable
-fun SdiletTlacitko(mesto: String, teplota: Double) {
-    val context = LocalContext.current
-    val text = stringResource(R.string.sdileny_text, mesto, teplota)
-
-    Button(onClick = {
-        val sendIntent = Intent(Intent.ACTION_SEND).apply {
-            type = "text/plain"
-            putExtra(Intent.EXTRA_TEXT, text)
+            Button(
+                onClick = {
+                    val sendIntent = Intent(Intent.ACTION_SEND).apply {
+                        type = "text/plain"
+                        putExtra(Intent.EXTRA_TEXT, textKeSdileni)
+                    }
+                    try {
+                        context.startActivity(Intent.createChooser(sendIntent, null))
+                    } catch (e: ActivityNotFoundException) {
+                        Log.w("Cyklus", "Nic na tomto zařízení neumí přijmout text", e)
+                    }
+                },
+                modifier = Modifier.padding(top = 24.dp)
+            ) {
+                Text(stringResource(R.string.sdilet_zaznam))
+            }
         }
-        try {
-            context.startActivity(Intent.createChooser(sendIntent, null))
-        } catch (e: ActivityNotFoundException) {
-            Log.w(TAG, "Na tomto zařízení není nic, co by umělo přijmout text", e)
-        }
-    }) {
-        Text(stringResource(R.string.sdilet_zaznam))
     }
 }

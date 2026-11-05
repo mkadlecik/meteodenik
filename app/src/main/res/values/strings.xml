@@ -11,4 +11,8 @@
     <string name="teplota_format">%1$.1f °C</string>
     <string name="teplota_chybi">Teplota není k dispozici</string>
     <string name="poslat_zpravu">Zapsat záznam</string>
+    <string name="baterie_format">Baterie: %1$d %%</string>
+    <string name="seznam_titulek">Seznam titulek</string>
+    <string name="detail_titulek">Detail titulek</string>
+
 </resources>

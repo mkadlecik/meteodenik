@@ -1,9 +1,12 @@
 package cz.utb.meteodenik.ui
 
 import android.content.Intent
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -15,34 +18,55 @@ import androidx.compose.ui.unit.dp
 import cz.utb.meteodenik.DetailMestaActivity
 import cz.utb.meteodenik.R
 import cz.utb.meteodenik.ZaznamUlozenReceiver
+import cz.utb.meteodenik.model.UKAZKOVA_MESTA
 
 @Composable
 fun SeznamMestObrazovka() {
-    val context = LocalContext.current          // Context pro startActivity – na začátku funkce
+    val context = LocalContext.current
 
     Scaffold { insety ->
-        Column(modifier = Modifier.padding(insety).padding(16.dp)) {
+        Column(modifier = Modifier.padding(insety)) {
+
             Text(
-                text = stringResource(R.string.app_name),
-                style = MaterialTheme.typography.headlineSmall
+                text = stringResource(R.string.seznam_titulek),
+                style = MaterialTheme.typography.headlineSmall,
+                modifier = Modifier.padding(16.dp)
             )
-            Button(onClick = {
-                val intent = Intent(context, DetailMestaActivity::class.java).apply {
-                    putExtra(DetailMestaActivity.EXTRA_MESTO, "Zlín")
-                    putExtra(DetailMestaActivity.EXTRA_TEPLOTA, 21.4)
+
+            UKAZKOVA_MESTA.forEach { mesto ->
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable {
+                            val intent = Intent(context, DetailMestaActivity::class.java).apply {
+                                putExtra(DetailMestaActivity.EXTRA_MESTO, mesto.nazev)
+                                putExtra(DetailMestaActivity.EXTRA_TEPLOTA, mesto.teplota)
+                            }
+                            context.startActivity(intent)
+                        }
+                        .padding(16.dp)
+                ) {
+                    Text(mesto.nazev, style = MaterialTheme.typography.titleMedium)
+                    Text(
+                        text = stringResource(R.string.teplota_format, mesto.teplota),
+                        style = MaterialTheme.typography.bodySmall
+                    )
                 }
-                context.startActivity(intent)
-            }) {
-                Text(stringResource(R.string.otevri_detail))
+                HorizontalDivider()
             }
-            Button(onClick = {
-                context.sendBroadcast(
-                    Intent(ZaznamUlozenReceiver.ACTION_ZAZNAM_ULOZEN).apply {
-                        setPackage(context.packageName)
-                        putExtra(ZaznamUlozenReceiver.EXTRA_MESTO, "Zlín")
-                    }
-                )
-            }) {
+
+            // Tlačítko z kroku 7 (vlastní broadcast). Kdo krok 7 vynechal, tento blok nemá.
+            Button(
+                onClick = {
+                    context.sendBroadcast(
+                        Intent(ZaznamUlozenReceiver.ACTION_ZAZNAM_ULOZEN).apply {
+                            setPackage(context.packageName)
+                            putExtra(ZaznamUlozenReceiver.EXTRA_MESTO, UKAZKOVA_MESTA.first().nazev)
+                        }
+                    )
+                },
+                modifier = Modifier.padding(16.dp)
+            ) {
                 Text(stringResource(R.string.poslat_zpravu))
             }
         }

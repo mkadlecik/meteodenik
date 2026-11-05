@@ -25,33 +25,18 @@ class DetailMestaActivity : ComponentActivity() {
         val teplota = intent.getDoubleExtra(EXTRA_TEPLOTA, Double.NaN)
 
         enableEdgeToEdge()
-        setContent { MeteoDenikTheme { DetailObrazovka(mesto = mesto, teplota = teplota) } }
+        setContent {
+            MeteoDenikTheme {
+                DetailObrazovka(mesto = mesto, teplota = teplota)
+            }
+        }
     }
 
-    override fun onStart() {
-        super.onStart()
-        Log.d(TAG, "DetailMestaActivity  onStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d(TAG, "DetailMestaActivity  onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d(TAG, "DetailMestaActivity  onPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d(TAG, "DetailMestaActivity  onStop")
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        Log.d(TAG, "DetailMestaActivity  onRestart")
-    }
+    override fun onStart()   { super.onStart();   Log.d(TAG, "DetailMestaActivity  onStart") }
+    override fun onResume()  { super.onResume();  Log.d(TAG, "DetailMestaActivity  onResume") }
+    override fun onPause()   { super.onPause();   Log.d(TAG, "DetailMestaActivity  onPause") }
+    override fun onStop()    { super.onStop();    Log.d(TAG, "DetailMestaActivity  onStop") }
+    override fun onRestart() { super.onRestart(); Log.d(TAG, "DetailMestaActivity  onRestart") }
 
     override fun onDestroy() {
         super.onDestroy()
