@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">MeteoDenik</string>
-    <string name="uvodni_text">Meteo deník — Martin Kadlečík</string>
+    <string name="uvodni_text">Meteo denik — Martin Kadlecik</string>
     <string name="text_po_kliknuti">Dnes bylo 21 °C a jasno.</string>
     <string name="akce_zmen_text">Zapsat dnešní počasí</string>
     <string name="title_activity_detail_mesta">DetailMestaActivity</string>
@@ -14,5 +14,13 @@
     <string name="baterie_format">Baterie: %1$d %%</string>
     <string name="seznam_titulek">Seznam titulek</string>
     <string name="detail_titulek">Detail titulek</string>
+    <string name="poloha_povolena">Poloha povolena</string>
+    <string name="poloha_bez_opravneni">Nemáte povolené oprávnění k poloze</string>
+    <string name="otevrit_nastaveni">Otevřít nastavení</string>
+    <string name="poloha_vysvetleni">Nemáte povolený přístup k poloze.</string>
+    <string name="poloha_pokracovat">Pokračovat</string>
+    <string name="poloha_zjistit">Zjistit polohu</string>
+    <string name="seznam_titulek_pocet" translatable="false">Moje města — %1$s</string>
 
+    <plurals name="pocet_zaznamu">Počet záznamů</plurals>
 </resources>
