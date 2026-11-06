@@ -20,6 +20,8 @@ import cz.utb.meteodenik.DetailMestaActivity
 import cz.utb.meteodenik.R
 import cz.utb.meteodenik.ZaznamUlozenReceiver
 import cz.utb.meteodenik.model.UKAZKOVA_MESTA
+import androidx.compose.foundation.background
+import androidx.compose.ui.res.colorResource
 
 @Composable
 fun SeznamMestObrazovka() {
@@ -39,6 +41,7 @@ fun SeznamMestObrazovka() {
             UKAZKOVA_MESTA.forEach { mesto ->
                 Column(
                     modifier = Modifier
+                        .background(colorResource(R.color.pozadi_karty))
                         .fillMaxWidth()
                         .clickable {
                             val intent = Intent(context, DetailMestaActivity::class.java).apply {

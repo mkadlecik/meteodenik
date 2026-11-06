@@ -21,4 +21,9 @@
     <string name="poloha_vysvetleni">You have not allowed location access.</string>
     <string name="poloha_pokracovat">Continue</string>
     <string name="poloha_zjistit">Get location</string>
+
+    <plurals name="pocet_zaznamu">
+        <item quantity="one">%d record</item>
+        <item quantity="other">%d records</item>
+    </plurals>
 </resources>
