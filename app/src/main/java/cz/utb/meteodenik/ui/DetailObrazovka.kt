@@ -39,6 +39,12 @@ fun DetailObrazovka(mesto: String, teplota: Double) {
                 },
                 style = MaterialTheme.typography.titleLarge
             )
+            if (teplotaJeZnama) {
+                Text(
+                    text = stringResource(R.string.detail_souhrn, mesto, teplota),
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
 
             Button(
                 onClick = {

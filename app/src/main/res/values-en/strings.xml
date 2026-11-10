@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Weather Diary</string>
+
+    <string name="seznam_titulek">My cities</string>
+    <string name="seznam_titulek_pocet">My cities — %1$s</string>
+    <string name="teplota_format">%1$.1f °C</string>
+    <string name="teplota_chybi">Temperature is not available</string>
+    <string name="otevri_detail">Open city detail</string>
+    <plurals name="pocet_zaznamu">
+        <item quantity="one">%1$d record</item>
+        <item quantity="other">%1$d records</item>
+    </plurals>
+
+    <string name="title_activity_detail_mesta">City detail</string>
+    <string name="detail_titulek">City detail</string>
+    <string name="mesto_nezname">Unknown city</string>
+    <string name="detail_souhrn">It is %2$.1f °C in %1$s right now</string>
+    <string name="sdilet_zaznam">Share record</string>
+    <string name="sdileny_text">%1$s: %2$.1f °C — recorded in Weather Diary</string>
+    <string name="poslat_zpravu">Add record</string>
+    <string name="baterie_format">Battery: %1$d %%</string>
+
+    <string name="poloha_zjistit">Find my location</string>
+    <string name="poloha_vysvetleni">We use your approximate location solely to display the weather in your current area. Your location data is neither stored nor shared.</string>
+    <string name="poloha_pokracovat">I understand, continue</string>
+    <string name="poloha_povolena">Location access granted</string>
+    <string name="poloha_souradnice">Your approximate coordinates are %1$.4f, %2$.4f</string>
+    <string name="poloha_neznama">Unable to determine your location. Please select a city from the list below.</string>
+    <string name="poloha_bez_opravneni">The app works fine without location access, but you\'ll need to select a city manually. You can change this in settings anytime.</string>
+    <string name="otevrit_nastaveni">Go to settings</string>
+
+    <string name="popis_ikony_teploty">Thermometer</string>
+
+    <string name="uvodni_text">MeteoDiary - Martin Kadlecik</string>
+    <string name="text_po_kliknuti">Today was 21 °C and clear.</string>
+    <string name="akce_zmen_text">Log today\'s weather</string>
+</resources>
