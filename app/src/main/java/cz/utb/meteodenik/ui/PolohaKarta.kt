@@ -1,8 +1,11 @@
 package cz.utb.meteodenik.ui
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationManager
 import android.net.Uri
 import android.provider.Settings
 import androidx.activity.compose.LocalActivity
@@ -37,8 +40,30 @@ private const val OPRAVNENI_POLOHA = Manifest.permission.ACCESS_COARSE_LOCATION
 
 enum class StavOpravneni { NEZNAMY, ODMITNUTO, ODMITNUTO_NATRVALO, UDELENO }
 
+/**
+ * Vrátí poslední známou polohu, nebo null. Kontrola oprávnění je uvnitř,
+ * protože platí pravidlo "kontroluj před každým použitím" — mezi udělením
+ * a čtením mohl uživatel oprávnění odebrat v Nastavení.
+ */
+private fun prectiPolohu(context: Context): Location? {
+    if (ContextCompat.checkSelfPermission(context, OPRAVNENI_POLOHA)
+        != PackageManager.PERMISSION_GRANTED
+    ) return null
+
+    val lm = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+    return try {
+        lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+            ?: lm.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
+    } catch (_: SecurityException) {
+        // Poslední záchranná síť: oprávnění mohlo být odebráno mezi kontrolou a voláním.
+        null
+    }
+}
+
+// Parametr zůstal z praktického průchodu: volání PolohaKarta(onPolohaPovolena = {})
+// v SeznamMestObrazovka se tak nemusí měnit.
 @Composable
-fun PolohaKarta(onPolohaPovolena: () -> Unit) {
+fun PolohaKarta(onPolohaPovolena: () -> Unit = {}) {
     val context = LocalContext.current
     val activity = LocalActivity.current
 
@@ -50,6 +75,8 @@ fun PolohaKarta(onPolohaPovolena: () -> Unit) {
         )
     }
     var zobrazitVysvetleni by remember { mutableStateOf(false) }
+    var poloha by remember { mutableStateOf<Location?>(null) }
+    var polohaZjistovana by remember { mutableStateOf(false) }
 
     val spoustec = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -61,10 +88,15 @@ fun PolohaKarta(onPolohaPovolena: () -> Unit) {
                 -> StavOpravneni.ODMITNUTO
             else -> StavOpravneni.ODMITNUTO_NATRVALO
         }
-        if (povoleno) onPolohaPovolena()
+        if (povoleno) {
+            poloha = prectiPolohu(context)
+            polohaZjistovana = true
+            onPolohaPovolena()
+        }
     }
 
-    // Návrat z Nastavení: uživatel tam mohl oprávnění mezitím povolit.
+    // Návrat z Nastavení: uživatel tam mohl oprávnění mezitím povolit
+    // (callback spouštěče se v tom případě nezavolá).
     val aktualniOnPolohaPovolena by rememberUpdatedState(onPolohaPovolena)
     val lifecycle = (activity as? LifecycleOwner)?.lifecycle
     DisposableEffect(lifecycle) {
@@ -84,8 +116,25 @@ fun PolohaKarta(onPolohaPovolena: () -> Unit) {
 
     Column(modifier = Modifier.padding(16.dp)) {
         when (stav) {
-            StavOpravneni.UDELENO ->
-                Text(stringResource(R.string.poloha_povolena))
+
+            StavOpravneni.UDELENO -> {
+                Text(
+                    text = stringResource(R.string.poloha_povolena),
+                    style = MaterialTheme.typography.bodyMedium
+                )
+                Spacer(Modifier.height(8.dp))
+                val p = poloha
+                when {
+                    p != null -> Text(
+                        stringResource(R.string.poloha_souradnice, p.latitude, p.longitude)
+                    )
+                    polohaZjistovana -> Text(stringResource(R.string.poloha_neznama))
+                    else -> Button(onClick = {
+                        poloha = prectiPolohu(context)
+                        polohaZjistovana = true
+                    }) { Text(stringResource(R.string.poloha_zjistit)) }
+                }
+            }
 
             StavOpravneni.ODMITNUTO_NATRVALO -> {
                 Text(
@@ -104,7 +153,10 @@ fun PolohaKarta(onPolohaPovolena: () -> Unit) {
             }
 
             else -> if (zobrazitVysvetleni) {
-                Text(stringResource(R.string.poloha_vysvetleni))
+                Text(
+                    text = stringResource(R.string.poloha_vysvetleni),
+                    style = MaterialTheme.typography.bodyMedium
+                )
                 Spacer(Modifier.height(8.dp))
                 Button(onClick = {
                     zobrazitVysvetleni = false
