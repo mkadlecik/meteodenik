@@ -30,8 +30,12 @@ fun SeznamMestObrazovka() {
     Scaffold { insety ->
         Column(modifier = Modifier.padding(insety)) {
 
+            val pocet = UKAZKOVA_MESTA.size
             Text(
-                text = stringResource(R.string.seznam_titulek),
+                text = stringResource(
+                    R.string.seznam_titulek_pocet,
+                    pluralStringResource(R.plurals.pocet_zaznamu, pocet, pocet)
+                ),
                 style = MaterialTheme.typography.headlineSmall,
                 modifier = Modifier.padding(16.dp)
             )
@@ -56,14 +60,6 @@ fun SeznamMestObrazovka() {
                     Text(
                         text = stringResource(R.string.teplota_format, mesto.teplota),
                         style = MaterialTheme.typography.bodySmall
-                    )
-                    val pocet = UKAZKOVA_MESTA.size
-                    Text(
-                        text = stringResource(
-                            R.string.seznam_titulek_pocet,
-                            pluralStringResource(R.plurals.pocet_zaznamu, pocet, pocet)
-                        ),
-                        style = MaterialTheme.typography.headlineSmall
                     )
                 }
                 HorizontalDivider()

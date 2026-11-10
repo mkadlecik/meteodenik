@@ -19,12 +19,14 @@
     <string name="otevrit_nastaveni">Otevřít nastavení</string>
     <string name="poloha_vysvetleni">Nemáte povolený přístup k poloze.</string>
     <string name="poloha_pokracovat">Pokračovat</string>
-    <string name="poloha_zjistit">Zjistit polohu</string>
-    <string name="seznam_titulek_pocet" translatable="false">Moje města — %1$s</string>
+    <string name="poloha_zjistit">Zjistit moji polohu</string>
+    <string name="seznam_titulek_pocet">Moje města — %1$s</string>
+    <string name="detail_souhrn">%1$s má právě %2$.1f °C</string>
 
     <plurals name="pocet_zaznamu">
         <item quantity="one">%d záznam</item>
         <item quantity="few">%d záznamy</item>
+        <item quantity="many">%d záznamu</item>
         <item quantity="other">%d záznamů</item>
     </plurals>
 </resources>

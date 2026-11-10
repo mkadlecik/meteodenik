@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MeteoDiary</string>
+    <string name="app_name">Weather Diary</string>
     <string name="uvodni_text">MeteoDiary - Martin Kadlecik</string>
     <string name="text_po_kliknuti">Today was 21 °C and clear.</string>
     <string name="akce_zmen_text">Log today\'s weather</string>
@@ -11,7 +11,7 @@
     <string name="sdileny_text">%1$s: %2$.1f °C — recorded in MeteoDiary</string>
     <string name="teplota_format">%1$.1f °C</string>
     <string name="teplota_chybi">Temperature not available</string>
-    <string name="poslat_zpravu">Save record</string>
+    <string name="poslat_zpravu">Add record</string>
     <string name="baterie_format">Battery: %1$d %%</string>
     <string name="seznam_titulek">List title</string>
     <string name="detail_titulek">Detail title</string>
@@ -20,7 +20,9 @@
     <string name="otevrit_nastaveni">Open settings</string>
     <string name="poloha_vysvetleni">You have not allowed location access.</string>
     <string name="poloha_pokracovat">Continue</string>
-    <string name="poloha_zjistit">Get location</string>
+    <string name="poloha_zjistit">Find my location</string>
+    <string name="seznam_titulek_pocet">My cities — %1$s</string>
+    <string name="detail_souhrn">%1$s currently has %2$.1f °C</string>
 
     <plurals name="pocet_zaznamu">
         <item quantity="one">%d record</item>
