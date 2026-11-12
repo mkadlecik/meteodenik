@@ -2,6 +2,14 @@
 <resources>
     <string name="app_name">Weather Diary</string>
 
+    <string name="mesta_titulek">My cities</string>
+    <string name="mesta_prazdno">No cities yet. Add the first one.</string>
+    <string name="mesto_pole_label">City name</string>
+    <string name="mesto_pridat">Add</string>
+    <string name="mesto_teplota">%1$.1f °C</string>
+    <string name="mesto_teplota_neznama">Temperature not known yet</string>
+    <string name="mesto_avatar_popis">City badge</string>
+
     <string name="seznam_titulek">My cities</string>
     <string name="seznam_titulek_pocet">My cities — %1$s</string>
     <string name="teplota_format">%1$.1f °C</string>
@@ -35,4 +43,17 @@
     <string name="uvodni_text">MeteoDiary - Martin Kadlecik</string>
     <string name="text_po_kliknuti">Today was 21 °C and clear.</string>
     <string name="akce_zmen_text">Log today\'s weather</string>
+
+    <!-- business card (exercise 7.1) -->
+    <string name="vizitka_avatar_popis">Profile avatar: %1$s</string>
+    <string name="vizitka_email_popis">Email: %1$s</string>
+
+    <!-- deleting cities, duplicate validation, count (exercise 7.2) -->
+    <string name="mesto_duplikat">A city with this name is already in the list</string>
+    <string name="mesto_smazat_popis">Delete city %1$s</string>
+    <string name="mesto_smazat">Delete</string>
+    <plurals name="mesta_pocet">
+        <item quantity="one">%1$d city</item>
+        <item quantity="other">%1$d cities</item>
+    </plurals>
 </resources>

@@ -2,6 +2,14 @@
 <resources>
     <string name="app_name">MeteoDeník</string>
 
+    <string name="mesta_titulek">Moje města</string>
+    <string name="mesta_prazdno">Zatím tu není žádné město. Přidejte první.</string>
+    <string name="mesto_pole_label">Název města</string>
+    <string name="mesto_pridat">Přidat</string>
+    <string name="mesto_teplota">%1$.1f °C</string>
+    <string name="mesto_teplota_neznama">Teplotu zatím neznáme</string>
+    <string name="mesto_avatar_popis">Značka města</string>
+
     <!-- seznam měst -->
     <string name="seznam_titulek">Moje města</string>
     <string name="seznam_titulek_pocet">Moje města — %1$s</string>
@@ -41,4 +49,19 @@
     <string name="uvodni_text">Meteo denik — Martin Kadlecik</string>
     <string name="text_po_kliknuti">Dnes bylo 21 °C a jasno.</string>
     <string name="akce_zmen_text">Zapsat dnešní počasí</string>
+
+    <!-- vizitková karta (cvičení 7.1) -->
+    <string name="vizitka_avatar_popis">Profilový avatar: %1$s</string>
+    <string name="vizitka_email_popis">E-mail: %1$s</string>
+
+    <!-- mazání měst, validace duplikátů, počet (cvičení 7.2) -->
+    <string name="mesto_duplikat">Město s tímto názvem už v seznamu je</string>
+    <string name="mesto_smazat_popis">Smazat město %1$s</string>
+    <string name="mesto_smazat">Smazat</string>
+    <plurals name="mesta_pocet">
+        <item quantity="one">%1$d město</item>
+        <item quantity="few">%1$d města</item>
+        <item quantity="many">%1$d města</item>
+        <item quantity="other">%1$d měst</item>
+    </plurals>
 </resources>
