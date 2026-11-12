@@ -53,4 +53,15 @@
     <!-- vizitková karta (cvičení 7.1) -->
     <string name="vizitka_avatar_popis">Profilový avatar: %1$s</string>
     <string name="vizitka_email_popis">E-mail: %1$s</string>
+
+    <!-- mazání měst, validace duplikátů, počet (cvičení 7.2) -->
+    <string name="mesto_duplikat">Město s tímto názvem už v seznamu je</string>
+    <string name="mesto_smazat_popis">Smazat město %1$s</string>
+    <string name="mesto_smazat">Smazat</string>
+    <plurals name="mesta_pocet">
+        <item quantity="one">%1$d město</item>
+        <item quantity="few">%1$d města</item>
+        <item quantity="many">%1$d města</item>
+        <item quantity="other">%1$d měst</item>
+    </plurals>
 </resources>
