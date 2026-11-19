@@ -38,6 +38,6 @@ class MestaViewModel(
     }
     override fun onCleared() {
         super.onCleared()
-        Log.d("Stav", "MestaViewModel onCleared")   // dočasně, pro dnešní měření
+        Log.d("Stav", "onCleared")
     }
 }

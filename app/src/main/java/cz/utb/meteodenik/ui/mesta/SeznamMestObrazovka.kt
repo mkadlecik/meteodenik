@@ -204,6 +204,7 @@ private fun SeznamMestObsah(
     onPridejMesto: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    // Rozepsaný text v poli je efemérní UI stav jednoho prvku, proto patří do UI a rememberSaveable, ne do ViewModelu.
     var rozepsanyNazev by rememberSaveable { mutableStateOf("") }
 
     Scaffold(
