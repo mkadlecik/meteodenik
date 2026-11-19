@@ -1,6 +1,9 @@
 package cz.utb.meteodenik.ui.detail
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -21,36 +24,79 @@ import cz.utb.meteodenik.ui.theme.MeteoDenikTheme
 @Composable
 fun DetailObrazovka(
     onZpet: () -> Unit,
+    modifier: Modifier = Modifier,
     viewModel: DetailViewModel = viewModel(),
 ) {
     val stav by viewModel.uiState.collectAsStateWithLifecycle()
-    DetailObsah(stav = stav, onZpet = onZpet)
+    DetailObsah(
+        stav = stav,
+        onZpet = onZpet,
+        modifier = modifier,
+    )
 }
 
 @Composable
 private fun DetailObsah(
     stav: DetailUiState,
     onZpet: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
-    Scaffold { insety ->
-        Column(modifier = Modifier.padding(insety).padding(16.dp)) {
-            Text(
-                text = stav.mesto?.nazev ?: stringResource(R.string.mesto_nezname),
-                style = MaterialTheme.typography.headlineMedium,
-            )
-            Button(onClick = onZpet, modifier = Modifier.padding(top = 24.dp)) {
+    Scaffold(modifier = modifier) { insety ->
+        Column(
+            modifier = Modifier
+                .padding(insety)
+                .padding(16.dp),
+        ) {
+            val mesto = stav.mesto
+            if (mesto != null) {
+                Text(
+                    text = mesto.nazev,
+                    style = MaterialTheme.typography.headlineMedium,
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = if (mesto.teplotaC != null) {
+                        stringResource(R.string.teplota_format, mesto.teplotaC)
+                    } else {
+                        stringResource(R.string.teplota_chybi)
+                    },
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            } else {
+                Text(
+                    text = stringResource(R.string.mesto_nezname),
+                    style = MaterialTheme.typography.headlineMedium,
+                )
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            Button(onClick = onZpet) {
                 Text(stringResource(R.string.zpet))
             }
         }
     }
 }
 
-@Preview(showBackground = true)
+@Preview(name = "Detail — světlá", showBackground = true)
+@Preview(name = "Detail — tmavá", showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun DetailObrazovkaPreview() {
     MeteoDenikTheme {
         DetailObsah(
             stav = DetailUiState(mesto = Mesto(1, "Brno", 23.1)),
+            onZpet = {},
+        )
+    }
+}
+
+@Preview(name = "Detail — neexistující město", showBackground = true)
+@Composable
+private fun DetailObrazovkaNeznamyPreview() {
+    MeteoDenikTheme {
+        DetailObsah(
+            stav = DetailUiState(mesto = null),
             onZpet = {},
         )
     }
