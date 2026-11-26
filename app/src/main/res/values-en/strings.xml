@@ -58,4 +58,15 @@
     </plurals>
 
     <string name="zpet">Back</string>
+
+    <!-- network errors (lesson 11) -->
+    <string name="chyba_bez_pripojeni">No internet connection. Check Wi-Fi or mobile data.</string>
+    <string name="chyba_server_neodpovida">Server not responding. Please try again in a moment.</string>
+    <string name="chyba_prilis_mnoho_dotazu">Request limit reached. Try again in a minute.</string>
+    <string name="chyba_pozadavku">Failed to load data. Try removing and re-adding the city.</string>
+    <string name="chyba_serveru">Server error on data provider side. Try again later.</string>
+    <string name="chyba_neplatna_odpoved">Unexpected response from server. If on public Wi-Fi, log in.</string>
+    <string name="chyba_jina_site">Connection could not be completed.</string>
+    <string name="akce_zkusit_znovu">Try again</string>
+    <string name="akce_obnovit">Refresh</string>
 </resources>

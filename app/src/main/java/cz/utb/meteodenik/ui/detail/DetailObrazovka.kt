@@ -53,16 +53,6 @@ private fun DetailObsah(
                     text = mesto.nazev,
                     style = MaterialTheme.typography.headlineMedium,
                 )
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = if (mesto.teplotaC != null) {
-                        stringResource(R.string.teplota_format, mesto.teplotaC)
-                    } else {
-                        stringResource(R.string.teplota_chybi)
-                    },
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
             } else {
                 Text(
                     text = stringResource(R.string.mesto_nezname),
@@ -85,7 +75,7 @@ private fun DetailObsah(
 private fun DetailObrazovkaPreview() {
     MeteoDenikTheme {
         DetailObsah(
-            stav = DetailUiState(mesto = Mesto(1, "Brno", 23.1)),
+            stav = DetailUiState(mesto = Mesto(1, "Brno", 49.1951, 16.6068)),
             onZpet = {},
         )
     }
