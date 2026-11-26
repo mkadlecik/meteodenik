@@ -69,4 +69,20 @@
     <string name="chyba_jina_site">Connection could not be completed.</string>
     <string name="akce_zkusit_znovu">Try again</string>
     <string name="akce_obnovit">Refresh</string>
+
+    <!-- weather state and detail (exercise 11.1) -->
+    <string name="pocasi_jasno">Clear</string>
+    <string name="pocasi_polojasno">Partly cloudy</string>
+    <string name="pocasi_zatazeno">Overcast</string>
+    <string name="pocasi_mlha">Fog</string>
+    <string name="pocasi_mrholeni">Drizzle</string>
+    <string name="pocasi_dest">Rain</string>
+    <string name="pocasi_snezeni">Snow</string>
+    <string name="pocasi_prehanky">Showers</string>
+    <string name="pocasi_bourka">Thunderstorm</string>
+    <string name="pocasi_neznamy">Unknown state</string>
+
+    <string name="detail_vlhkost">Humidity: %1$d %%</string>
+    <string name="detail_vitr">Wind speed: %1$.1f km/h</string>
+    <string name="detail_cas_mereni">Measurement time: %1$s</string>
 </resources>

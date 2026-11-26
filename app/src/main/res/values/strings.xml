@@ -77,4 +77,20 @@
     <string name="chyba_jina_site">Spojení se nepovedlo dokončit.</string>
     <string name="akce_zkusit_znovu">Zkusit znovu</string>
     <string name="akce_obnovit">Obnovit</string>
+
+    <!-- stav počasí a detail (cvičení 11.1) -->
+    <string name="pocasi_jasno">Jasno</string>
+    <string name="pocasi_polojasno">Polojasno</string>
+    <string name="pocasi_zatazeno">Zataženo</string>
+    <string name="pocasi_mlha">Mlha</string>
+    <string name="pocasi_mrholeni">Mrholení</string>
+    <string name="pocasi_dest">Déšť</string>
+    <string name="pocasi_snezeni">Sněžení</string>
+    <string name="pocasi_prehanky">Přeháňky</string>
+    <string name="pocasi_bourka">Bouřka</string>
+    <string name="pocasi_neznamy">Neznámý stav</string>
+
+    <string name="detail_vlhkost">Vlhkost: %1$d %%</string>
+    <string name="detail_vitr">Rychlost větru: %1$.1f km/h</string>
+    <string name="detail_cas_mereni">Čas měření: %1$s</string>
 </resources>
