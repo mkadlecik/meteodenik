@@ -3,9 +3,11 @@ package cz.utb.meteodenik.ui.detail
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -19,7 +21,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cz.utb.meteodenik.R
 import cz.utb.meteodenik.model.Mesto
+import cz.utb.meteodenik.model.MeteoZaznam
+import cz.utb.meteodenik.model.StavPocasi
+import cz.utb.meteodenik.ui.textProUzivatele
 import cz.utb.meteodenik.ui.theme.MeteoDenikTheme
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 @Composable
 fun DetailObrazovka(
@@ -41,28 +48,63 @@ private fun DetailObsah(
     onZpet: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val casFormater = DateTimeFormatter.ofPattern("HH:mm")
+
     Scaffold(modifier = modifier) { insety ->
         Column(
             modifier = Modifier
                 .padding(insety)
                 .padding(16.dp),
         ) {
+            if (stav.nacitaSe) {
+                LinearProgressIndicator(modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp))
+            }
+
             val mesto = stav.mesto
+            val pocasi = stav.pocasi
+
             if (mesto != null) {
                 Text(
                     text = mesto.nazev,
-                    style = MaterialTheme.typography.headlineMedium,
+                    style = MaterialTheme.typography.headlineLarge,
                 )
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = if (mesto.teplotaC != null) {
-                        stringResource(R.string.teplota_format, mesto.teplotaC)
-                    } else {
-                        stringResource(R.string.teplota_chybi)
-                    },
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
+                Spacer(modifier = Modifier.height(12.dp))
+
+                if (pocasi != null) {
+                    Text(
+                        text = stringResource(R.string.teplota_format, pocasi.teplotaC),
+                        style = MaterialTheme.typography.displayMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                    Text(
+                        text = stringResource(pocasi.stav.textProUzivatele()),
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Text(
+                        text = stringResource(R.string.detail_vlhkost, pocasi.vlhkostProcent),
+                        style = MaterialTheme.typography.bodyLarge,
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = stringResource(R.string.detail_vitr, pocasi.rychlostVetruKmH),
+                        style = MaterialTheme.typography.bodyLarge,
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = stringResource(R.string.detail_cas_mereni, pocasi.cas.format(casFormater)),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                } else {
+                    Text(
+                        text = stringResource(R.string.teplota_chybi),
+                        style = MaterialTheme.typography.bodyLarge,
+                    )
+                }
             } else {
                 Text(
                     text = stringResource(R.string.mesto_nezname),
@@ -85,18 +127,16 @@ private fun DetailObsah(
 private fun DetailObrazovkaPreview() {
     MeteoDenikTheme {
         DetailObsah(
-            stav = DetailUiState(mesto = Mesto(1, "Brno", 23.1)),
-            onZpet = {},
-        )
-    }
-}
-
-@Preview(name = "Detail — neexistující město", showBackground = true)
-@Composable
-private fun DetailObrazovkaNeznamyPreview() {
-    MeteoDenikTheme {
-        DetailObsah(
-            stav = DetailUiState(mesto = null),
+            stav = DetailUiState(
+                mesto = Mesto(1, "Brno", 49.1951, 16.6068),
+                pocasi = MeteoZaznam(
+                    cas = LocalDateTime.now(),
+                    teplotaC = 23.1,
+                    vlhkostProcent = 58,
+                    rychlostVetruKmH = 14.5,
+                    stav = StavPocasi.POLOJASNO,
+                ),
+            ),
             onZpet = {},
         )
     }
