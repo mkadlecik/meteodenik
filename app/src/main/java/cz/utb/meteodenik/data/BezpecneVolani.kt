@@ -22,9 +22,9 @@ internal suspend fun <T> bezpecneVolani(blok: suspend () -> T): VysledekSite<T> 
         VysledekSite.Selhani(
             when {
                 e.code() == 429 -> DuvodSelhani.PRILIS_MNOHO_DOTAZU
-                e.code() in 400..499 -> DuvodSelhani.CHYBA_POZADAVKU
+                (e.code() in 400..499) -> DuvodSelhani.CHYBA_POZADAVKU
                 else -> DuvodSelhani.CHYBA_SERVERU
-            }
+            },
         )
     } catch (e: SerializationException) {
         VysledekSite.Selhani(DuvodSelhani.NEPLATNA_ODPOVED)
